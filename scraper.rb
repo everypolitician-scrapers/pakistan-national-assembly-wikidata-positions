@@ -46,7 +46,7 @@ EOQ
 data = sparql(memberships_query).map(&:to_h).map do |r|
   {
     id:                          wikidata_id(r[:item]),
-    name:                        r[:officialname].to_s.empty? ? r[:itemlabel] : r[:officialname],
+    name:                        r[:scrapername].to_s.empty? ? r[:itemlabel] : r[:scrapername],
     start_date:                  r[:start_date].to_s[0..9],
     end_date:                    r[:end_date].to_s[0..9],
     legislative_membership_type: r[:hasrolelabel].to_s.empty? ? '' : r[:hasrolelabel],
