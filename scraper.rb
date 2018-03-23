@@ -40,6 +40,7 @@ SELECT DISTINCT ?item ?itemLabel ?start_date ?end_date ?hasRoleLabel ?constituen
     FILTER(CONTAINS(LCASE(STR(?url)), "www.na.gov.pk/"))
   }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+  FILTER(!BOUND(?end_date) || ?end_date > NOW())
 }
 EOQ
 
