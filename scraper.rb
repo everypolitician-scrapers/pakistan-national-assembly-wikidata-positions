@@ -21,13 +21,16 @@ def wikidata_id(url)
 end
 
 memberships_query = <<EOQ
-SELECT DISTINCT ?item ?itemLabel ?start_date ?end_date ?hasRoleLabel ?constituency ?constituencyLabel ?party ?partyLabel ?term ?termLabel ?termOrdinal ?scraperName WHERE {
+SELECT DISTINCT ?item ?itemLabel ?start_date ?end_date ?hasRoleLabel ?constituency ?constituencyLabel ?party ?partyLabel ?partyShortname ?term ?termLabel ?termOrdinal ?scraperName WHERE {
   ?item p:P39 ?statement.
   ?statement ps:P39 wd:Q33512801; pq:P2937 wd:Q29068722 .
   OPTIONAL { ?statement pq:P580 ?start_date. }
   OPTIONAL { ?statement pq:P582 ?end_date. }
   OPTIONAL { ?statement pq:P768 ?constituency. }
-  OPTIONAL { ?statement pq:P4100 ?party. }
+  OPTIONAL {
+    ?statement pq:P4100 ?party .
+    OPTIONAL { ?party wdt:P1813 ?partyShortname . }
+  }
   OPTIONAL { ?statement pq:P2868 ?hasRole. }
   OPTIONAL {
     ?statement pq:P2937 ?term .
@@ -41,6 +44,7 @@ SELECT DISTINCT ?item ?itemLabel ?start_date ?end_date ?hasRoleLabel ?constituen
   }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
   FILTER(!BOUND(?end_date) || ?end_date > NOW())
+  FILTER (LANG(?partyShortname) = 'en')
 }
 EOQ
 
@@ -54,7 +58,7 @@ data = sparql(memberships_query).map(&:to_h).map do |r|
     constituency:                r[:constituencylabel],
     constituency_id:             r[:constituencylabel][/(NA-[0-9]+)/, 1] || wikidata_id(r[:constituency]),
     party:                       r[:partylabel],
-    party_id:                    wikidata_id(r[:party]),
+    party_id:                    r[:partyshortname].to_s.empty? ? wikidata_id(r[:party]) : r[:partyshortname].downcase ,
     term:                        r[:termordinal],
   }
 end
