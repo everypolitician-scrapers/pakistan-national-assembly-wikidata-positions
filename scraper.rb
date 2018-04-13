@@ -57,7 +57,7 @@ data = sparql(memberships_query).map(&:to_h).map do |r|
     legislative_membership_type: r[:hasrolelabel].to_s.empty? ? '' : r[:hasrolelabel],
     constituency:                r[:constituencylabel],
     constituency_id:             r[:constituencylabel][/(NA-[0-9]+)/, 1] || wikidata_id(r[:constituency]),
-    party:                       r[:partylabel],
+    party:                       r[:partyshortname].to_s.empty? ? r[:partylabel] : r[:partyshortname],
     party_id:                    r[:partyshortname].to_s.empty? ? wikidata_id(r[:party]) : r[:partyshortname].downcase ,
     term:                        r[:termordinal],
   }
