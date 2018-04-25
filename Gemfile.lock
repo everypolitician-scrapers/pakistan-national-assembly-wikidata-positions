@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/everypolitician/wikidata-fetcher.git
-  revision: bbbd4826f0fd5dcbac93f0d0214a8cb960b526eb
+  revision: f6a205f4c13b81233f6f66293a87d24e5881e23f
   specs:
     wikidata-fetcher (0.21.0)
       colorize
@@ -55,12 +55,12 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.0.5)
     diskcached (1.1.3)
-    domain_name (0.5.20170404)
+    domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     everypolitician-popolo (0.8.0)
       require_all
-    excon (0.60.0)
-    faraday (0.14.0)
+    excon (0.62.0)
+    faraday (0.15.0)
       multipart-post (>= 1.2, < 3)
     faraday-cookie_jar (0.0.6)
       faraday (>= 0.7.4)
@@ -71,7 +71,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httpclient (2.8.3)
-    i18n (0.9.4)
+    i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     json (2.1.0)
     mediawiki_api (0.7.1)
@@ -89,21 +89,21 @@ GEM
       mini_portile2 (~> 2.3.0)
     open-uri-cached (0.0.5)
     parallel (1.12.1)
-    parser (2.4.0.2)
-      ast (~> 2.3)
+    parser (2.5.1.0)
+      ast (~> 2.4.0)
     powerpack (0.1.1)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     rainbow (3.0.0)
-    require_all (1.5.0)
+    require_all (2.0.0)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rubocop (0.52.1)
+    rubocop (0.55.0)
       parallel (~> 1.10)
-      parser (>= 2.4.0.2, < 3.0)
+      parser (>= 2.5)
       powerpack (~> 0.1)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
@@ -113,7 +113,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
-    unicode-display_width (1.3.0)
+    unicode-display_width (1.3.2)
     wikidata-client (0.0.12)
       excon (~> 0.40)
       faraday (~> 0.9)
