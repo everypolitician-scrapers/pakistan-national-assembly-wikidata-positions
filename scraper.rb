@@ -58,7 +58,7 @@ data = sparql(memberships_query).map(&:to_h).map do |r|
     constituency:                r[:constituencylabel],
     constituency_id:             r[:constituencylabel][/(NA-[0-9]+)/, 1] || wikidata_id(r[:constituency]),
     party:                       r[:partyshortname].to_s.empty? ? r[:partylabel] : r[:partyshortname],
-    party_id:                    r[:partyshortname].to_s.empty? ? wikidata_id(r[:party]) : r[:partyshortname].downcase ,
+    party_id:                    r[:partyshortname].to_s.empty? ? wikidata_id(r[:party]) : r[:partyshortname].downcase.tr('^a-z', ''),
     term:                        r[:termordinal],
   }
 end
